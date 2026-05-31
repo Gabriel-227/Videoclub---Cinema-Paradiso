@@ -101,3 +101,30 @@ def registrar_prestamo():
     pelicula_encontrada['estado'] = 'prestada'
     
     print(f'¡Prestamo N° {nuevo_id} fue registrado con éxito!')
+    
+#VER PRÉSTAMOS ACTIVOS / BUSCAR
+
+def prestamos_activos():
+    print('\n=== LISTADO DE PRESTAMOS ACTIVOS ===')
+    hay_prestamos_activos = False
+    
+    for prestamo in prestamos:
+        if prestamo['estado'] == 'activo':
+            mostrar_prestamo(prestamo)
+            prestamos_activos = True
+            
+    if prestamos_activos == False:
+        print('No hay prestamos activos registrados en este momento.')
+        
+def buscar_prestamo_por_socio():
+    print('\n=== BUSCAR PRESTAMOS DE UN SOCIO ===')
+    id_socio_buscar = validar_numero('Ingrese el número ID del socio: ')
+    encontrado_uno = False
+    
+    for prestamo in prestamos:
+        if prestamo['id_socio'] == id_socio_buscar:
+            mostrar_prestamo(prestamo)
+            encontrado_uno = True
+    
+    if encontrado_uno == False:
+        print('No se encontraron registros de préstamos para el socio ingresado')
