@@ -10,12 +10,10 @@ from peliculas import peliculas
 from socios import socios
 
 #Lista Global vacia de prestamos 
-
 prestamos = []
 
 
 #funciones Buscar y mostrar
-
 def buscar_prestamos_id(id_buscar):
     """Busca un préstamo en la lista local por su ID y lo devuelve. Si no existe, devuelve None."""
     for prestamo in prestamos:
@@ -41,9 +39,10 @@ def mostrar_prestamo(prestamo):
     print(f'Prestado el dia: {fecha_prestamo} | Entrega pactada: {fecha_pactada}')
     print(f'Fecha de devulición: {fecha_real}')
     print('-' * 50)
+   
+   
     
 # ALTA - REGISTRAR PRÉSTAMO NUEVO
-
 def registrar_prestamo():
     print('\n=== REGISTRAR UN PRÉSTAMO NUEVO===')
     
@@ -102,8 +101,9 @@ def registrar_prestamo():
     
     print(f'¡Prestamo N° {nuevo_id} fue registrado con éxito!')
     
+    
+    
 #VER PRÉSTAMOS ACTIVOS / BUSCAR
-
 def prestamos_activos():
     print('\n=== LISTADO DE PRESTAMOS ACTIVOS ===')
     hay_prestamos_activos = False
@@ -128,10 +128,11 @@ def buscar_prestamo_por_socio():
     
     if encontrado_uno == False:
         print('No se encontraron registros de préstamos para el socio ingresado')
+     
+     
         
        
 #Registrar Devolución 
-
 def registrar_devolucion():
     print('\n=== REGISTRAR UNA DEVOLUCION ===')
     
@@ -159,10 +160,12 @@ def registrar_devolucion():
             break
     print(f'¡Devolución procesada con éxito! Operación N° {id_operacion} cerrada.')
     print(f'La pelicula ID: {prestamo['id_pelicula']} vuelve a estar DISPONIBLE')
+   
+   
+   
     
-    #ELIMINAR PRÉSTAMO MAL CARGADO (Bajas)
-    
-    def eliminar_prestamo():
+#ELIMINAR PRÉSTAMO MAL CARGADO (Bajas)    
+def eliminar_prestamo():
         print('\n=== ELIMINAR PRÉSTAMO MAL CARGADO ===')
         
         # 1. Utilizar el ID de la operación a borrar
@@ -194,3 +197,35 @@ def registrar_devolucion():
             print('Registro eliminado correctamente.')
         else:
             print('Operación cancelada. El préstamo no fue eliminado.')
+            
+            
+            
+#MENÚ DE CONTROL GENERAL
+def menu_prestamos():
+    while True:
+        print('\n=== SISTEMA DE GÉSTIOS DE PRÉSTAMOS ===')
+        print('1. Registrar un nuevo préstamo')
+        print('2. Ver listado de préstamos activos')
+        print('3. Buscar historial de un socio')
+        print('4. Registrar devolucion de película')
+        print('5. Eliminar préstamo mal cargado')
+        print('9. Volver al menú principal')
+        
+        opcion = input('¿Que desea hacer?: ').strip()
+        
+        match opcion:
+            case '1':
+                registrar_prestamo()
+            case '2':
+                prestamos_activos()
+            case '3':
+                buscar_prestamo_por_socio()
+            case '4':
+                registrar_devolucion()
+            case '5':
+                eliminar_prestamo()
+            case '9':
+                print('Saliendo de la seccion préstamos...')
+                break
+            case _:
+                print('Opción inválida.Por favor, elija un número del menú.')
