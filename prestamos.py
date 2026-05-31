@@ -128,3 +128,34 @@ def buscar_prestamo_por_socio():
     
     if encontrado_uno == False:
         print('No se encontraron registros de préstamos para el socio ingresado')
+        
+       
+#Registrar Devolución 
+
+def registrar_devolucion():
+    print('\n=== REGISTRAR UNA DEVOLUCION ===')
+    
+    #Pedir el ID de la operación - Buscar el préstamo
+    id_operacion = validar_numero('Ingrese el número de operación del préstamo: ')
+    prestamo = buscar_prestamos_id(id_operacion)
+    
+    #Validar que el préstamo exista
+    if prestamo == None:
+        print('Error: no se encontró ninguna operación con ese ID.')
+        return
+
+    if prestamo['estado'] != 'activo':
+        print('Esta operacion ya se encuntra cerrada la pelicula fue devuelta.')
+        return
+    
+    #Procesar la devolución 
+    prestamo['fecha_devolucion_real'] = date.today()
+    prestamo['estado'] = 'devuelto'
+    
+    #Cambiar el estado de la película
+    for pelicula in peliculas:
+        if pelicula['id'] == prestamo['id_pelicula']:
+            pelicula['estado'] = 'disponible'
+            break
+    print(f'¡Devolución procesada con éxito! Operación N° {id_operacion} cerrada.')
+    print(f'La pelicula ID: {prestamo['id_pelicula']} vuelve a estar DISPONIBLE')
