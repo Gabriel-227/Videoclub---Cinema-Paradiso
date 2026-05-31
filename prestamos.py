@@ -159,3 +159,38 @@ def registrar_devolucion():
             break
     print(f'¡Devolución procesada con éxito! Operación N° {id_operacion} cerrada.')
     print(f'La pelicula ID: {prestamo['id_pelicula']} vuelve a estar DISPONIBLE')
+    
+    #ELIMINAR PRÉSTAMO MAL CARGADO (Bajas)
+    
+    def eliminar_prestamo():
+        print('\n=== ELIMINAR PRÉSTAMO MAL CARGADO ===')
+        
+        # 1. Utilizar el ID de la operación a borrar
+        id_operacion = validar_numero('Ingrese número de la operación a eliminar: ')
+        
+        #Buscar si el prestamo existe
+        prestamo = buscar_prestamos_id(id_operacion)
+        
+        if prestamo == None:
+            print('Error: nose encontró ninguna operación con ese ID.')
+            
+        #Mostrar el préstamo en pantalla para borrar
+        print('\n ATENCIÓN: Se procederá a eliminar el siguiente registro: ')
+        mostrar_prestamo(prestamo)
+        
+        #Solicitar confirmación obligatoria
+        confirmacion = input('\n¿Seguro que deseas eliminar este pretamo definitivamente? (s/n)').lower().strip()
+        
+        if confirmacion == 's':
+            #Regla de negocio: Si el préstamo estaba activo, liberamos la película primero
+            if prestamo['estado'] == 'activo':
+                for pelicula in peliculas:
+                    if pelicula['id'] == prestamo['id_pelicula']:
+                        pelicula['estado'] = 'disponible'
+                        break
+        
+            #Borrar definitivamente de la lista global
+            prestamo.remove(prestamo)
+            print('Registro eliminado correctamente.')
+        else:
+            print('Operación cancelada. El préstamo no fue eliminado.')
