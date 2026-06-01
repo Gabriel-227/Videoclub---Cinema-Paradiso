@@ -90,7 +90,7 @@ def registrar_prestamo():
         'id_pelicula': id_pelicula,
         'id_socio': id_socio,
         'fecha_prestamo': fecha_hoy,
-        'fecha_devolucion_pactada': fecha_pactada,
+        'fecha_pactada': fecha_pactada,
         'fecha_devolucion_real': None,
         'estado': 'activo'
     }
