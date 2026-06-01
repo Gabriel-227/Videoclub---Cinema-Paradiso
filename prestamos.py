@@ -182,7 +182,7 @@ def eliminar_prestamo():
         mostrar_prestamo(prestamo)
         
         #Solicitar confirmación obligatoria
-        confirmacion = input('\n¿Seguro que deseas eliminar este pretamo definitivamente? (s/n)').lower().strip()
+        confirmacion = input('\n¿Seguro que deseas eliminar este pretamo definitivamente? (s/n): ').lower().strip()
         
         if confirmacion == 's':
             #Regla de negocio: Si el préstamo estaba activo, liberamos la película primero
