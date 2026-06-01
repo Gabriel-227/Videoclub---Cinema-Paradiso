@@ -25,7 +25,7 @@ def buscar_prestamos_id(id_buscar):
 def mostrar_prestamo(prestamo):
     """Imprime en pantalla un prestamo individual"""
     fecha_prestamo = prestamo['fecha_prestamo'].strftime('%d/%m/%y')
-    fecha_pactada = prestamo['fecha_devolucion_pactada'].strftime('%d/%m/%y')
+    fecha_pactada = prestamo['fecha_pactada'].strftime('%d/%m/%y')
     
     # Validamos si la fecha real está vacía (None) o si ya tiene una fecha guardada
     if prestamo['fecha_devolucion_real'] != None:
@@ -59,7 +59,7 @@ def registrar_prestamo():
         return
     
     #Validar si la pelicula existe en peliculas.py
-    id_pelicula = validar_numero('Ingrese el ID de la Película')
+    id_pelicula = validar_numero('Ingrese el ID de la Película: ')
     pelicula_encontrada = None
     for pelicula in peliculas:
         if pelicula['id'] == id_pelicula:
@@ -90,8 +90,8 @@ def registrar_prestamo():
         'id_pelicula': id_pelicula,
         'id_socio': id_socio,
         'fecha_prestamo': fecha_hoy,
-        'fecha-devolicoion-pactada': fecha_pactada,
-        'fecha-devolucion-real': None,
+        'fecha_devolucion_pactada': fecha_pactada,
+        'fecha_devolucion_real': None,
         'estado': 'activo'
     }
     
@@ -193,7 +193,7 @@ def eliminar_prestamo():
                         break
         
             #Borrar definitivamente de la lista global
-            prestamo.remove(prestamo)
+            prestamos.remove(prestamo)
             print('Registro eliminado correctamente.')
         else:
             print('Operación cancelada. El préstamo no fue eliminado.')
