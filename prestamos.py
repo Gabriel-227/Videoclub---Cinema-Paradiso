@@ -111,9 +111,9 @@ def prestamos_activos():
     for prestamo in prestamos:
         if prestamo['estado'] == 'activo':
             mostrar_prestamo(prestamo)
-            prestamos_activos = True
+            hay_prestamos_activos = True
             
-    if prestamos_activos == False:
+    if hay_prestamos_activos == False:
         print('No hay prestamos activos registrados en este momento.')
         
 def buscar_prestamo_por_socio():
